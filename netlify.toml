@@ -1,0 +1,18 @@
+[build]
+  # Pinned so the build cannot change under us when Netlify moves its
+  # default Node. Vite 6 needs 18+; .nvmrc and this must agree.
+  NODE_VERSION = "22"
+  command = "npm run build"
+  publish = "dist"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Brotli/Gzip compression is enabled automatically by Netlify.

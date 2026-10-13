@@ -1,0 +1,42 @@
+-- ---------------------------------------------------------------------------
+-- 008 - make the job-evidence bucket private
+-- ---------------------------------------------------------------------------
+-- The evidence bucket was created public, and 006 wrote a careful read policy
+-- for it: "authenticated, and staff or the customer whose own service this
+-- file belongs to". That policy was inert. A public bucket is served from
+-- /storage/v1/object/public/<bucket>/<path> with no authorisation check at
+-- all, so the only thing standing between a customer's visit photos and
+-- signature and a logged-out visitor was the random UUID in the object name
+-- (objectName() in src/services/jobService.ts).
+--
+-- That is obscurity, not access control. Any copy of the URL defeats it: a
+-- link pasted into WhatsApp or email, a screenshot, a Referer header, a proxy
+-- log. The signature in particular is a customer's own signature on their own
+-- property.
+--
+-- Flipping the bucket to private makes 006's policy the only route in, which
+-- is what it was written to be. Nothing else changes:
+--   * stored storage_path values are untouched, so no rows or objects move
+--   * uploads are unaffected - they are authorised by the write policy, not by
+--     the bucket's privacy flag
+--   * the three places that display evidence (admin service detail, technician
+--     job page, customer portal) all go through loadEvidence() in
+--     src/services/jobService.ts, which resolves display URLs with
+--     createSignedUrl(). That is the only call site needing a change.
+--
+-- ORDERING: apply the frontend change that swaps evidenceUrl() (getPublicUrl)
+-- for createSignedUrl() BEFORE running this. While the bucket is public and the
+-- app is still asking for public URLs, everything works. Once this runs and the
+-- old code is still deployed, every existing image and signature 404s for
+-- everyone, because getPublicUrl returns a URL that a private bucket refuses
+-- to serve. It is a display-only failure and nothing is lost, but it looks
+-- alarming.
+--
+-- VERIFY after running:
+--   select id, public from storage.buckets where id = 'job-evidence';
+--   -- expect: job-evidence | f
+--
+-- Safe to run more than once.
+-- ---------------------------------------------------------------------------
+
+update storage.buckets set public = false where id = 'job-evidence';

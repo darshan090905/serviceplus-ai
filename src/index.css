@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+}
+
+@layer components {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+}
+
+@keyframes pay-pop-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pay-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pay-confetti {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--px, 0), var(--py, -90px)) rotate(var(--rot, 180deg));
+    opacity: 0;
+  }
+}
+
+@keyframes pay-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-pay-pop-in {
+  animation: pay-pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-pay-bounce {
+  animation: pay-bounce 1.2s ease-in-out infinite;
+}
+
+.pay-check-draw {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: pay-draw 0.45s ease-out 0.25s forwards;
+}
+
+.pay-ring-draw {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: pay-draw 0.6s ease-out forwards;
+}
+
+.pay-confetti-piece {
+  animation: pay-confetti 0.9s ease-out forwards;
+}
+
+/* ---------------------------------------------------------------------
+   Print
+   ---------------------------------------------------------------------
+   Added for invoices. The browser's own "Save as PDF" produces the same
+   bytes as a PDF library would, from the same markup, with no dependency —
+   so the work here is only to hide the app chrome and stop the page breaking
+   across sheets at an unhelpful place.
+
+   The controls are hidden with the print:hidden utility (Tailwind) rather
+   than with rules here, so a component opts out explicitly and it is visible
+   in the JSX which elements are not going to print.
+   --------------------------------------------------------------------- */
+@media print {
+  /* The app shell's sidebar, header and any sticky furniture. */
+  nav,
+  aside,
+  header.app-header {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  /* Anything that only exists to be a container on screen collapses, so the
+     invoice is not indented by the width of a page it is no longer inside. */
+  main,
+  .app-main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Do not let a card's rounded box or shadow survive onto paper. */
+  .shadow-card,
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+
+  /* Keep a line item row whole rather than splitting a description from its
+     amount across two pages. */
+  tr,
+  .print-keep-together {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  /* Print the link target where a URL is the actual information, which on an
+     invoice it usually is not, so they are suppressed. */
+  a[href]::after {
+    content: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Stat tiles that give up their furniture before they give up their number.
+
+   Tailwind 3 has no container-query support (that arrived in v4, or via a
+   separate plugin in v3), but the queries themselves are plain CSS and work in
+   every browser this app targets. They are deliberately left unlayered: the
+   overrides below have to beat `p-5` and `text-2xl`, which live in
+   @layer utilities, and unlayered rules outrank every layer.
+
+   A tile in a bare `grid-cols-3` on a phone is about 110px wide. Its padding
+   and icon badge together are 48px, which left the value roughly 17px to draw
+   itself into at 24px type - so the number clipped and the icon sat on top of
+   it. Ten pages place tiles in three columns, so this is fixed once here rather
+   than by touching each grid.
+   -------------------------------------------------------------------------- */
+.stat-tile {
+  container-type: inline-size;
+}
+
+@container (max-width: 11rem) {
+  .stat-tile-body {
+    padding: 0.875rem;
+  }
+
+  .stat-tile-value {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .stat-tile-icon {
+    padding: 0.375rem;
+  }
+
+  .stat-tile-icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@container (max-width: 8rem) {
+  .stat-tile-icon {
+    display: none;
+  }
+}

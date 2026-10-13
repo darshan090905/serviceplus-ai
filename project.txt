@@ -1,0 +1,3104 @@
+You are a senior full-stack frontend engineer, SaaS product designer, and UI/UX architect.
+
+Build the complete frontend application for the following product.
+
+# SERVICEPULSE
+
+**Tagline:** Track. Analyze. Retain.
+
+**Product:** Customer Retention & Service Intelligence Platform
+
+ServicePulse is a professional B2B SaaS platform for service companies and AMC businesses. It helps service operations teams manage customers, AMC contracts, services, complaints, payments, customer health, renewal risk, and retention actions.
+
+The most important product concept is:
+
+```text
+Customer Data
+      ↓
+Customer Health
+      ↓
+Renewal Risk
+      ↓
+Why is the customer at risk?
+      ↓
+Recommended Retention Action
+      ↓
+Owner Review / Approval
+      ↓
+Customer Follow-up
+      ↓
+Potential Renewal
+```
+
+---
+
+# CRITICAL INSTRUCTION
+
+Build the **ENTIRE FRONTEND in this task**.
+
+Do not stop after creating the shell.
+
+Do not ask me to provide additional information unless absolutely necessary.
+
+Work through the application systematically and finish all frontend modules.
+
+However, this is still a **frontend-only implementation**.
+
+DO NOT implement:
+
+* PostgreSQL
+* n8n
+* Real backend
+* Real authentication
+* Real Gemini API
+* Real Grok API
+* Real email sending
+* WhatsApp API
+* Payment gateway
+* Production infrastructure
+
+Use realistic mock data and frontend services.
+
+The architecture MUST be prepared so that real n8n APIs can replace the mock services later.
+
+---
+
+# TECHNOLOGY STACK
+
+Use:
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* React Router
+* Lucide React
+* Recharts
+
+Use modern React practices.
+
+Use functional components.
+
+Use TypeScript throughout.
+
+Avoid unnecessary dependencies.
+
+---
+
+# PRIMARY GOAL
+
+The final application must look like a **real enterprise B2B SaaS product**.
+
+It should be good enough to demonstrate to:
+
+* Company management
+* Service operations teams
+* Product managers
+* Technical interviewers
+* DevOps engineers
+* Potential customers
+
+It must NOT look like:
+
+* A student project
+* A generic admin dashboard
+* A template with random cards
+* A toy AI application
+
+The application should clearly communicate the ServicePulse business value.
+
+---
+
+# DESIGN DIRECTION
+
+Create an original visual identity for ServicePulse.
+
+General quality inspiration:
+
+* Modern SaaS dashboards
+* Enterprise CRM products
+* Service management platforms
+* Analytics platforms
+
+Do not copy any existing product.
+
+The design should be:
+
+* Professional
+* Clean
+* Modern
+* Minimal
+* Data-oriented
+* Trustworthy
+* Enterprise-ready
+* Highly usable
+
+Avoid:
+
+* Excessive gradients
+* Excessive glassmorphism
+* Neon colors
+* Huge typography
+* Cartoon illustrations
+* Excessive animations
+* Excessive rounded cards
+* Clutter
+* Unnecessary decorative elements
+
+Use whitespace and hierarchy effectively.
+
+---
+
+# BRAND
+
+Application name:
+
+ServicePulse
+
+Tagline:
+
+Track. Analyze. Retain.
+
+Create a simple professional logo treatment using text + Lucide icon.
+
+The logo must work in:
+
+* Expanded sidebar
+* Collapsed sidebar
+* Header/mobile navigation
+
+---
+
+# APPLICATION STRUCTURE
+
+Create:
+
+```text
+src/
+├── components/
+│   ├── layout/
+│   ├── ui/
+│   ├── dashboard/
+│   ├── customers/
+│   ├── amc/
+│   ├── services/
+│   ├── complaints/
+│   ├── payments/
+│   ├── retention/
+│   ├── reports/
+│   └── ai/
+│
+├── pages/
+├── services/
+├── types/
+├── data/
+├── hooks/
+├── utils/
+├── constants/
+└── ...
+```
+
+Keep components small and reusable.
+
+Do not create giant files.
+
+---
+
+# APPLICATION ROUTES
+
+Implement React Router.
+
+Routes:
+
+```text
+/dashboard
+
+/customers
+/customers/:id
+
+/amc-contracts
+/amc-contracts/:id
+
+/services
+
+/complaints
+/complaints/:id
+
+/payments
+
+/retention
+/retention/:id
+
+/reports
+
+/notifications
+
+/settings
+```
+
+Also implement:
+
+```text
+/*
+```
+
+for a professional 404 page.
+
+---
+
+# GLOBAL APPLICATION SHELL
+
+Create:
+
+* Sidebar
+* Header
+* Main content area
+* Responsive navigation
+
+Desktop:
+
+```text
+┌────────────────────────────────────────────────────┐
+│ Sidebar │ Header                                   │
+│         ├───────────────────────────────────────────┤
+│         │                                           │
+│         │ Main Content                              │
+│         │                                           │
+│         │                                           │
+│         │                                           │
+└────────────────────────────────────────────────────┘
+```
+
+---
+
+# SIDEBAR
+
+Navigation:
+
+## MAIN
+
+Dashboard
+
+Customers
+
+AMC Contracts
+
+Services
+
+Complaints
+
+Payments
+
+Retention Center
+
+Reports
+
+## SYSTEM
+
+Notifications
+
+Settings
+
+Bottom:
+
+User profile
+
+```text
+Darshan Patgar
+Service Operations
+```
+
+Use professional Lucide icons.
+
+Active navigation must be obvious.
+
+Sidebar must support:
+
+* Desktop expanded
+* Desktop collapsed
+* Tablet
+* Mobile drawer
+
+---
+
+# HEADER
+
+Create reusable header.
+
+Include:
+
+* Page title
+* Breadcrumb where useful
+* Global search
+* Notifications
+* User profile
+
+Search placeholder:
+
+```text
+Search customers, complaints, invoices...
+```
+
+Create functional frontend search UI.
+
+It can search mock customer data.
+
+---
+
+# GLOBAL SEARCH
+
+When user types a customer name, show search suggestions.
+
+Example:
+
+```text
+Search results
+
+Rajesh Kumar
+Customer
+AMC expires in 18 days
+
+Rajesh Enterprises
+Customer
+Health score 42
+```
+
+Clicking a result should navigate to the relevant customer.
+
+---
+
+# NOTIFICATIONS
+
+Header notification dropdown.
+
+Example notifications:
+
+```text
+Rajesh Kumar is now At Risk
+
+AMC for Priya Sharma expires in 22 days
+
+Complaint #CMP-1042 unresolved for 48 hours
+
+Payment INV-3021 is overdue
+```
+
+Unread indicator.
+
+Provide:
+
+Mark as read
+
+Mark all as read
+
+View all notifications
+
+---
+
+# USER MENU
+
+Profile dropdown:
+
+```text
+Profile
+Settings
+Sign out
+```
+
+UI only.
+
+---
+
+# DESIGN SYSTEM
+
+Create reusable components:
+
+```text
+Button
+Card
+Badge
+Input
+Select
+Textarea
+DatePicker/Input
+Modal/Dialog
+Dropdown
+Tooltip
+Tabs
+Table
+Avatar
+Progress
+Skeleton
+EmptyState
+ErrorState
+Toast
+Pagination
+SearchInput
+FilterBar
+PageHeader
+StatCard
+```
+
+Do not over-engineer.
+
+---
+
+# BUTTONS
+
+Variants:
+
+* Primary
+* Secondary
+* Outline
+* Ghost
+* Danger
+* Success
+
+Sizes:
+
+* Small
+* Medium
+* Large
+
+States:
+
+* Normal
+* Hover
+* Focus
+* Disabled
+* Loading
+
+---
+
+# STATUS SYSTEM
+
+Create reusable status components.
+
+Risk:
+
+```text
+Healthy
+Watch
+At Risk
+Critical
+```
+
+AMC:
+
+```text
+Active
+Expiring Soon
+Renewal Pending
+Renewed
+Expired
+```
+
+Complaint:
+
+```text
+Open
+In Progress
+Resolved
+Closed
+```
+
+Payment:
+
+```text
+Paid
+Pending
+Overdue
+Partially Paid
+```
+
+Service:
+
+```text
+Scheduled
+In Progress
+Completed
+Cancelled
+```
+
+---
+
+# HEALTH SCORE SYSTEM
+
+Customer Health Score:
+
+```text
+0–100
+```
+
+Starting score:
+
+```text
+100
+```
+
+Negative:
+
+```text
+Missed service       -15
+Complaint            -10
+Repeated complaint   -20
+Late payment         -15
+Overdue payment      -20
+```
+
+Positive:
+
+```text
+On-time payment      +10
+Successful renewal   +10
+Completed service     +5
+```
+
+Risk:
+
+```text
+80–100 → Healthy
+60–79  → Watch
+40–59  → At Risk
+0–39   → Critical
+```
+
+Implement this as reusable business logic in:
+
+```text
+src/utils/
+```
+
+Do not hardcode final scores throughout components.
+
+---
+
+# MOCK DATA
+
+Create realistic, internally consistent demo data.
+
+At least:
+
+```text
+30 customers
+20 AMC contracts
+40 service records
+30 complaints
+30 payments
+20 retention actions
+15 notifications
+```
+
+Use realistic Indian business examples.
+
+Examples:
+
+Rajesh Kumar
+
+Priya Sharma
+
+Amit Shah
+
+Neha Patel
+
+Suresh Enterprises
+
+GreenTech Solutions
+
+Urban Cooling Services
+
+Sharma Industries
+
+Use fictional demo information.
+
+Do not use real private individuals' data.
+
+Use Indian currency:
+
+```text
+₹
+```
+
+Make dates realistic for 2026.
+
+---
+
+# DATA CONSISTENCY
+
+Mock data must be relationally consistent.
+
+If Rajesh Kumar has:
+
+* 2 unresolved complaints
+
+those complaints must exist in the complaints dataset.
+
+If his AMC expires in 18 days, the date should correspond to the application's demo date.
+
+Health score factors must match the displayed score.
+
+Do not display contradictory information.
+
+---
+
+# TYPESCRIPT TYPES
+
+Create proper types/interfaces:
+
+```typescript
+Customer
+AMCContract
+ServiceRecord
+Complaint
+Payment
+CustomerHealth
+RiskFactor
+RetentionAction
+Notification
+DashboardMetrics
+AIComplaintAnalysis
+RenewalEmail
+```
+
+Use union types/enums for statuses.
+
+Avoid `any`.
+
+---
+
+# API SERVICE LAYER
+
+Create:
+
+```text
+src/services/
+```
+
+Files:
+
+```text
+customerService.ts
+amcService.ts
+serviceService.ts
+complaintService.ts
+paymentService.ts
+retentionService.ts
+dashboardService.ts
+notificationService.ts
+aiService.ts
+```
+
+For now, these return mock data.
+
+Architecture:
+
+```text
+React
+ ↓
+Service Layer
+ ↓
+Mock Data
+```
+
+Future:
+
+```text
+React
+ ↓
+Service Layer
+ ↓
+n8n API/Webhook
+ ↓
+PostgreSQL / AI / Email
+```
+
+Do not put data access directly inside every component.
+
+---
+
+# ENVIRONMENT
+
+Create:
+
+```text
+.env.example
+```
+
+with:
+
+```text
+VITE_API_BASE_URL=
+```
+
+Do not put AI keys or secrets in frontend code.
+
+---
+
+# PAGE 1 — DASHBOARD
+
+Route:
+
+```text
+/dashboard
+```
+
+This must be the strongest first impression.
+
+Header:
+
+```text
+Dashboard
+
+Here's what's happening across your customer base.
+```
+
+Include:
+
+Date filter:
+
+* Last 7 days
+* Last 30 days
+* Last 90 days
+* This year
+
+---
+
+## KPI CARDS
+
+Create:
+
+Total Customers
+
+```text
+326
++8.2%
+```
+
+Active AMCs
+
+```text
+248
++4.6%
+```
+
+Expiring Soon
+
+```text
+21
+Needs attention
+```
+
+High-Risk Customers
+
+```text
+17
+Requires action
+```
+
+Outstanding Payments
+
+```text
+₹2.4L
+12 overdue accounts
+```
+
+Renewal Rate
+
+```text
+82%
++3.4%
+```
+
+---
+
+# CUSTOMER HEALTH OVERVIEW
+
+Create Recharts visualization.
+
+Distribution:
+
+```text
+Healthy
+214
+
+Watch
+72
+
+At Risk
+27
+
+Critical
+13
+```
+
+Use a clean donut chart.
+
+Include legend and totals.
+
+---
+
+# RENEWAL PIPELINE
+
+Show:
+
+Healthy
+
+Watch
+
+At Risk
+
+Critical
+
+Display potential renewal revenue.
+
+Example:
+
+```text
+Healthy      ₹18.4L
+Watch         ₹7.2L
+At Risk       ₹3.8L
+Critical      ₹1.6L
+```
+
+Use a professional Recharts visualization.
+
+---
+
+# AMC EXPIRING SOON
+
+Table:
+
+```text
+Customer
+AMC
+Expiry
+Days Left
+Value
+Health
+Action
+```
+
+Include:
+
+View
+
+button.
+
+Clicking should navigate to customer.
+
+---
+
+# PRIORITY ACTIONS
+
+Create:
+
+```text
+Priority Actions
+```
+
+Examples:
+
+```text
+17 high-risk customers need attention
+
+8 complaints unresolved for more than 48 hours
+
+6 AMCs expire within 14 days
+
+12 payments overdue
+```
+
+Each should have CTA.
+
+---
+
+# RECENT ACTIVITY
+
+Timeline/feed:
+
+* Complaint resolved
+* Payment received
+* AMC renewed
+* Customer added
+* Service completed
+* Risk changed
+
+---
+
+# PAGE 2 — CUSTOMERS
+
+Route:
+
+```text
+/customers
+```
+
+Header:
+
+```text
+Customers
+
+Manage customer relationships and understand account health.
+```
+
+Primary CTA:
+
+```text
++ Add Customer
+```
+
+---
+
+# CUSTOMER KPI CARDS
+
+Show:
+
+Total Customers
+
+Healthy
+
+At Risk
+
+Critical
+
+---
+
+# CUSTOMER TABLE
+
+Columns:
+
+```text
+Customer
+Contact
+Service
+AMC Status
+AMC Expiry
+Health
+Risk
+Last Service
+Actions
+```
+
+Add:
+
+Search
+
+Filters
+
+Sort
+
+Pagination
+
+Filters:
+
+Customer Type
+
+Service Type
+
+Risk
+
+AMC Status
+
+---
+
+# ADD CUSTOMER
+
+Create modal.
+
+Fields:
+
+```text
+Name
+Company Name
+Email
+Phone
+Address
+Customer Type
+Service Type
+```
+
+Validation:
+
+* Name required
+* Valid email
+* Valid phone
+* Required service type
+
+On submit:
+
+Show success toast.
+
+Add the customer to local mock state.
+
+---
+
+# CUSTOMER DETAIL
+
+Route:
+
+```text
+/customers/:id
+```
+
+Create a polished profile.
+
+Top:
+
+Breadcrumb:
+
+```text
+Customers / Rajesh Kumar
+```
+
+Customer information.
+
+Show:
+
+```text
+Rajesh Kumar
+Rajesh Enterprises
+Email
+Phone
+Location
+```
+
+Health:
+
+```text
+42 / 100
+At Risk
+```
+
+---
+
+# CUSTOMER HEALTH CARD
+
+Create visual health score.
+
+Show risk level.
+
+Show risk factors:
+
+```text
+2 unresolved complaints
+Repeated service issue
+Late payment
+Poor recent service rating
+```
+
+---
+
+# HEALTH SCORE BREAKDOWN
+
+Show:
+
+```text
+Starting score      100
+
+Repeated complaint  -20
+Late payment        -15
+Missed service      -15
+Completed service    +5
+On-time payment     +10
+
+Final score          65
+```
+
+For each actual customer, calculate the displayed score consistently.
+
+Show a clear explanation.
+
+---
+
+# CUSTOMER OVERVIEW
+
+Sections:
+
+AMC
+
+```text
+Service
+Start
+End
+Amount
+Status
+```
+
+Service Performance
+
+```text
+Services completed
+Average rating
+Open complaints
+```
+
+Payment Health
+
+```text
+Total billed
+Paid
+Pending
+Overdue
+```
+
+---
+
+# CUSTOMER TABS
+
+Implement:
+
+```text
+Overview
+AMC
+Services
+Complaints
+Payments
+Retention
+```
+
+Tabs should work without page reload.
+
+---
+
+# CUSTOMER TIMELINE
+
+Example:
+
+```text
+05 Sep
+Service completed
+
+03 Sep
+Complaint opened
+
+30 Aug
+Payment received
+
+20 Aug
+Complaint resolved
+```
+
+---
+
+# RETENTION RECOMMENDATION ON CUSTOMER PAGE
+
+Show:
+
+```text
+Recommended Retention Action
+```
+
+Example:
+
+Primary risk:
+
+```text
+Service Quality
+```
+
+Recommended:
+
+```text
+Priority technician visit
++
+Senior technician review
++
+Follow-up after service
+```
+
+Reason:
+
+```text
+Recent service issues appear to be a stronger
+retention risk than pricing.
+```
+
+Buttons:
+
+```text
+Review Action
+Generate Message
+```
+
+---
+
+# PAGE 3 — AMC CONTRACTS
+
+Route:
+
+```text
+/amc-contracts
+```
+
+Header:
+
+```text
+AMC Contracts
+
+Manage service contracts, expiry dates and renewals.
+```
+
+KPIs:
+
+```text
+Active AMCs
+248
+
+Expiring Soon
+21
+
+Renewal Pending
+14
+
+Expired
+9
+```
+
+Table:
+
+```text
+AMC ID
+Customer
+Service
+Start Date
+End Date
+Amount
+Status
+Renewal
+Actions
+```
+
+Filters:
+
+Status
+
+Service
+
+Expiry
+
+Renewal status
+
+---
+
+# ADD AMC
+
+Modal:
+
+```text
+Customer
+Service Type
+Start Date
+End Date
+Amount
+Status
+Renewal Status
+```
+
+Validation:
+
+Amount > 0
+
+End date > Start date
+
+Customer required
+
+---
+
+# AMC DETAIL
+
+Route:
+
+```text
+/amc-contracts/:id
+```
+
+Show:
+
+Customer
+
+Service
+
+Contract period
+
+Amount
+
+Status
+
+Renewal status
+
+Timeline.
+
+---
+
+# PAGE 4 — SERVICES
+
+Route:
+
+```text
+/services
+```
+
+Header:
+
+```text
+Service History
+
+Track service activity and customer experience.
+```
+
+KPIs:
+
+```text
+Services This Month
+186
+
+Completed
+172
+
+Pending
+8
+
+Average Rating
+4.2
+```
+
+Table:
+
+```text
+Date
+Customer
+Service
+Technician
+Status
+Rating
+Notes
+Actions
+```
+
+Filters:
+
+Date
+
+Service
+
+Technician
+
+Status
+
+---
+
+# ADD SERVICE
+
+Modal:
+
+```text
+Customer
+Service Type
+Date
+Technician
+Status
+Rating
+Notes
+```
+
+Validation.
+
+Success toast.
+
+---
+
+# PAGE 5 — COMPLAINTS
+
+Route:
+
+```text
+/complaints
+```
+
+Header:
+
+```text
+Complaints
+
+Track, prioritize and resolve customer issues.
+```
+
+KPIs:
+
+```text
+Open Complaints
+18
+
+High Severity
+6
+
+In Progress
+9
+
+Resolved This Week
+24
+```
+
+Table:
+
+```text
+Complaint ID
+Customer
+Category
+Description
+Severity
+Status
+Created
+Assigned To
+Actions
+```
+
+Filters:
+
+Severity
+
+Status
+
+Category
+
+Date
+
+---
+
+# COMPLAINT DETAIL
+
+Route:
+
+```text
+/complaints/:id
+```
+
+Show:
+
+Customer
+
+Description
+
+Category
+
+Severity
+
+Status
+
+Created date
+
+Assigned technician
+
+Resolution
+
+---
+
+# AI COMPLAINT ANALYSIS
+
+Create a professional AI-assisted panel.
+
+Clearly label:
+
+```text
+AI-Assisted Analysis
+```
+
+This is mock functionality.
+
+Example:
+
+Input complaint:
+
+```text
+The technician came yesterday but the AC is still
+not cooling. This is the third time I am reporting
+the same issue.
+```
+
+Show generated analysis:
+
+```text
+Category
+AC Service
+
+Severity
+High
+
+Sentiment
+Negative
+
+Repeated Issue
+Yes
+
+Customer Frustration
+High
+```
+
+Recommendation:
+
+```text
+Assign a senior technician and prioritize resolution.
+```
+
+Button:
+
+```text
+Analyze with AI
+```
+
+Click:
+
+Loading state:
+
+```text
+Analyzing complaint...
+```
+
+Then display result.
+
+DO NOT call real AI.
+
+Use `aiService.ts`.
+
+---
+
+# ADD COMPLAINT
+
+Fields:
+
+```text
+Customer
+Category
+Description
+Severity
+Assigned Technician
+```
+
+Validation.
+
+---
+
+# PAGE 6 — PAYMENTS
+
+Route:
+
+```text
+/payments
+```
+
+Header:
+
+```text
+Payments
+
+Track collections, outstanding invoices and overdue payments.
+```
+
+KPIs:
+
+```text
+Total Collected
+₹18.6L
+
+Pending
+₹1.2L
+
+Overdue
+₹86K
+
+Collection Rate
+92%
+```
+
+Table:
+
+```text
+Invoice
+Customer
+AMC
+Amount
+Due Date
+Paid Date
+Status
+Payment Method
+Actions
+```
+
+Filters:
+
+Status
+
+Date
+
+Payment method
+
+---
+
+# RECORD PAYMENT
+
+Modal:
+
+```text
+Customer
+Invoice
+Amount
+Due Date
+Paid Date
+Payment Method
+Status
+```
+
+Validation.
+
+Success toast.
+
+---
+
+# PAGE 7 — RETENTION CENTER
+
+This is the **CORE PRODUCT PAGE**.
+
+Route:
+
+```text
+/retention
+```
+
+Header:
+
+```text
+Retention Center
+
+Prioritize customers who need attention before renewal is at risk.
+```
+
+---
+
+# RETENTION SUMMARY
+
+Cards:
+
+```text
+High Risk
+17
+
+Critical
+6
+
+Revenue at Risk
+₹4.8L
+
+Actions Pending
+12
+```
+
+---
+
+# PRIORITY CUSTOMER TABLE
+
+Columns:
+
+```text
+Priority
+Customer
+Health
+Risk
+AMC Expiry
+Revenue at Risk
+Primary Risk
+Recommended Action
+Status
+Actions
+```
+
+Example:
+
+```text
+1
+Rajesh Kumar
+42
+At Risk
+18 days
+₹12,000
+Service Quality
+Priority Technician Visit
+Pending
+```
+
+---
+
+# RETENTION DETAIL
+
+Route:
+
+```text
+/retention/:id
+```
+
+Show:
+
+Customer
+
+Health Score
+
+Risk
+
+AMC expiry
+
+Revenue at risk
+
+Risk factors
+
+Primary reason
+
+Recommended action
+
+Action status
+
+---
+
+# RETENTION LOGIC
+
+Important:
+
+DO NOT recommend discounts automatically to every high-risk customer.
+
+The application must show that retention action depends on the actual reason for risk.
+
+Examples:
+
+## Service Quality
+
+```text
+Priority technician
+Senior technician
+Complaint resolution
+Follow-up call
+```
+
+## Payment
+
+```text
+Payment plan
+Payment follow-up
+Extended payment terms
+```
+
+## Price
+
+```text
+Controlled renewal offer
+5–10% renewal incentive
+```
+
+Display:
+
+```text
+Owner approval required
+```
+
+for discounts.
+
+## Communication
+
+```text
+Personalized follow-up
+Renewal reminder
+Customer call
+```
+
+## Low Risk
+
+```text
+Normal renewal reminder
+Early renewal option
+Loyalty benefit
+```
+
+---
+
+# RETENTION ACTION WORKFLOW
+
+Implement frontend workflow:
+
+```text
+Review
+ ↓
+Select/Confirm Action
+ ↓
+Approve
+ ↓
+Success
+```
+
+Action states:
+
+```text
+Pending
+Approved
+In Progress
+Completed
+Rejected
+```
+
+Approval modal:
+
+```text
+Approve retention action?
+
+Action:
+Priority technician visit
+
+Customer:
+Rajesh Kumar
+```
+
+Buttons:
+
+Cancel
+
+Approve Action
+
+After approval:
+
+Show success toast.
+
+---
+
+# AI RENEWAL EMAIL GENERATOR
+
+Create a polished AI assistant interface.
+
+Title:
+
+```text
+AI Renewal Assistant
+```
+
+Context:
+
+```text
+Customer
+AMC
+Health Score
+Risk
+Primary Risk
+```
+
+Button:
+
+```text
+Generate Renewal Email
+```
+
+Mock loading:
+
+```text
+Generating personalized renewal email...
+```
+
+Then display:
+
+Subject
+
+Email body
+
+Actions:
+
+```text
+Regenerate
+Edit
+Approve & Send
+```
+
+Clearly display:
+
+```text
+AI-generated draft — review before sending.
+```
+
+---
+
+# EDIT EMAIL
+
+Allow editing subject and body.
+
+Use a professional email editor.
+
+---
+
+# APPROVE & SEND
+
+Since backend does not exist:
+
+Show confirmation:
+
+```text
+Email approved
+
+Email sending will be connected during backend integration.
+```
+
+Do NOT actually send an email.
+
+---
+
+# PAGE 8 — REPORTS
+
+Route:
+
+```text
+/reports
+```
+
+Header:
+
+```text
+Reports & Analytics
+
+Understand customer health, renewals and service performance.
+```
+
+Add date filter.
+
+---
+
+# REPORTS
+
+Create professional Recharts visualizations.
+
+## Customer Health Distribution
+
+Donut chart.
+
+Healthy
+
+Watch
+
+At Risk
+
+Critical
+
+---
+
+## Renewal Rate
+
+Line chart over time.
+
+Example:
+
+Jan 76%
+
+Feb 78%
+
+Mar 79%
+
+Apr 81%
+
+May 80%
+
+Jun 82%
+
+---
+
+## Complaint Trends
+
+Bar chart by category.
+
+Example:
+
+Service Quality
+
+Billing
+
+Technician
+
+Product
+
+Other
+
+---
+
+## Revenue at Risk
+
+Line/area chart over time.
+
+---
+
+## Payment Collection
+
+Chart:
+
+Collected
+
+Pending
+
+Overdue
+
+---
+
+## Retention Performance
+
+Show:
+
+Retention actions
+
+Successful interventions
+
+Renewals
+
+Revenue retained
+
+---
+
+# PAGE 9 — NOTIFICATIONS
+
+Route:
+
+```text
+/notifications
+```
+
+Create full notification center.
+
+Tabs:
+
+```text
+All
+Risk
+AMC
+Complaints
+Payments
+System
+```
+
+Each notification:
+
+Icon
+
+Title
+
+Description
+
+Time
+
+Read/unread state
+
+CTA where appropriate.
+
+Actions:
+
+Mark as read
+
+Mark all as read
+
+---
+
+# PAGE 10 — SETTINGS
+
+Route:
+
+```text
+/settings
+```
+
+Create professional settings interface.
+
+Sections:
+
+```text
+Profile
+Company
+Notifications
+Retention Rules
+AI Preferences
+System
+```
+
+---
+
+# PROFILE
+
+Fields:
+
+Name
+
+Role
+
+Email
+
+Phone
+
+Avatar
+
+Save Changes button.
+
+---
+
+# COMPANY
+
+Fields:
+
+Company name
+
+Industry
+
+Address
+
+Email
+
+Phone
+
+Currency
+
+Save.
+
+---
+
+# NOTIFICATION SETTINGS
+
+Toggles:
+
+AMC expiry alerts
+
+High-risk alerts
+
+Payment overdue alerts
+
+Complaint escalation alerts
+
+Weekly reports
+
+---
+
+# RETENTION RULES
+
+Show configurable health thresholds:
+
+```text
+Healthy
+80–100
+
+Watch
+60–79
+
+At Risk
+40–59
+
+Critical
+0–39
+```
+
+These can be UI controls but should use the same defaults.
+
+---
+
+# AI PREFERENCES
+
+Show:
+
+```text
+Complaint Analysis
+Enabled
+
+Risk Explanation
+Enabled
+
+Renewal Email Generation
+Enabled
+```
+
+Also display:
+
+```text
+AI provider will be configured during backend integration.
+```
+
+Do not expose API keys.
+
+---
+
+# SYSTEM
+
+Show:
+
+Application version
+
+Environment
+
+API connection status
+
+For now:
+
+```text
+Frontend Demo
+```
+
+---
+
+# RESPONSIVE DESIGN
+
+The entire application must work on:
+
+```text
+1920px
+1440px
+1280px
+1024px
+768px
+390px
+```
+
+Desktop:
+
+Persistent sidebar.
+
+Tablet:
+
+Collapsible sidebar.
+
+Mobile:
+
+Drawer navigation.
+
+Tables:
+
+Use horizontal scrolling or carefully designed responsive cards.
+
+Charts:
+
+Resize correctly.
+
+Modals:
+
+Fit mobile screens.
+
+Forms:
+
+Single column on mobile.
+
+Do NOT simply shrink desktop UI.
+
+---
+
+# ACCESSIBILITY
+
+Implement:
+
+* Semantic HTML
+* Keyboard navigation
+* Visible focus states
+* Proper labels
+* Accessible dialogs
+* Accessible buttons
+* Appropriate aria-labels
+* Good contrast
+* Keyboard-friendly dropdowns
+
+Do not rely only on color.
+
+Example:
+
+Bad:
+
+Red = Critical
+
+Better:
+
+Critical + icon + text.
+
+---
+
+# UX FEEDBACK
+
+Every action should provide feedback.
+
+Examples:
+
+Add customer:
+
+```text
+Customer added successfully.
+```
+
+Add AMC:
+
+```text
+AMC contract created successfully.
+```
+
+Analyze complaint:
+
+```text
+AI analysis completed.
+```
+
+Generate email:
+
+```text
+Renewal email generated.
+```
+
+Approve retention action:
+
+```text
+Retention action approved.
+```
+
+Errors:
+
+```text
+Unable to complete this action.
+Please try again.
+```
+
+---
+
+# LOADING STATES
+
+Use skeleton loaders for:
+
+* Dashboard
+* Tables
+* Customer details
+* Reports
+
+AI actions:
+
+```text
+Analyzing complaint...
+```
+
+```text
+Generating renewal email...
+```
+
+---
+
+# EMPTY STATES
+
+Create useful empty states.
+
+Example:
+
+```text
+No complaints found
+
+There are no complaints matching your current filters.
+
+Clear Filters
+```
+
+---
+
+# ERROR STATES
+
+Reusable error state:
+
+```text
+Unable to load this information.
+
+Please try again.
+
+Try Again
+```
+
+---
+
+# SEARCH / FILTER SYSTEM
+
+All major tables should support:
+
+Search
+
+Filter
+
+Sort
+
+Pagination where appropriate.
+
+Show:
+
+```text
+17 customers
+3 filters applied
+```
+
+Include:
+
+Clear filters.
+
+---
+
+# FORMS
+
+Use consistent form design.
+
+Customer:
+
+```text
+Name
+Company
+Email
+Phone
+Address
+Customer Type
+Service Type
+```
+
+AMC:
+
+```text
+Customer
+Service
+Start Date
+End Date
+Amount
+```
+
+Service:
+
+```text
+Customer
+Service Type
+Date
+Technician
+Status
+Rating
+Notes
+```
+
+Complaint:
+
+```text
+Customer
+Category
+Description
+Severity
+Assigned Technician
+```
+
+Payment:
+
+```text
+Customer
+Invoice
+Amount
+Due Date
+Paid Date
+Payment Method
+Status
+```
+
+Retention:
+
+```text
+Recommended Action
+Reason
+Owner
+Priority
+```
+
+Use frontend validation.
+
+---
+
+# DATA VISUALIZATION
+
+Use Recharts.
+
+Charts must:
+
+* Have useful labels
+* Have tooltips
+* Have legends where necessary
+* Be responsive
+* Not be visually overwhelming
+
+Do not use charts just for decoration.
+
+Every chart should communicate a business insight.
+
+---
+
+# AI UX PRINCIPLE
+
+AI is an assistant.
+
+Do not present AI as an autonomous decision-maker.
+
+Use:
+
+```text
+AI-assisted analysis
+
+AI-generated draft
+
+Suggested action
+
+Review before sending
+```
+
+Retention flow:
+
+```text
+Business Rules
++
+Customer Data
++
+AI Assistance
++
+Owner Approval
+```
+
+AI should not silently execute important actions.
+
+---
+
+# HEALTH SCORE EXPLANATION
+
+Always make risk explainable.
+
+Never show only:
+
+```text
+Risk: High
+```
+
+Instead show:
+
+```text
+Risk: At Risk
+
+Why?
+
+2 unresolved complaints
+Repeated service issue
+Late payment
+Poor recent rating
+```
+
+This is a core product differentiator.
+
+---
+
+# CUSTOMER REVENUE AT RISK
+
+Show revenue context in Retention Center.
+
+Example:
+
+```text
+Revenue at Risk
+₹4.8L
+```
+
+Individual customer:
+
+```text
+AMC Value
+₹18,500
+
+Revenue at Risk
+₹18,500
+```
+
+Make it clear that this is potential revenue exposure, not guaranteed loss.
+
+---
+
+# BUSINESS DASHBOARD QUESTIONS
+
+The dashboard must answer these questions quickly:
+
+1. How many customers do we have?
+2. How healthy are they?
+3. How many are at risk?
+4. Which AMCs are expiring?
+5. How much revenue is at risk?
+6. Which complaints need attention?
+7. Which payments are overdue?
+8. What should the operations team do next?
+
+---
+
+# CORE PRODUCT STORY
+
+Throughout the UI, reinforce:
+
+```text
+Track
+ ↓
+Analyze
+ ↓
+Identify Risk
+ ↓
+Understand Why
+ ↓
+Recommend Action
+ ↓
+Review
+ ↓
+Retain
+```
+
+Do not make ServicePulse look like a generic CRM.
+
+Its unique purpose is:
+
+**Customer Retention Intelligence.**
+
+---
+
+# FUTURE BACKEND PREPARATION
+
+The future backend architecture is:
+
+```text
+React
+   ↓
+HTTPS
+   ↓
+n8n Webhook/API
+   ↓
+PostgreSQL
+   ↓
+Business Logic
+   ↓
+Gemini/Grok
+   ↓
+Email API
+```
+
+The frontend must therefore keep backend concerns separated.
+
+Do not:
+
+* Put business API calls in components
+* Put secrets in frontend
+* Hardcode n8n URLs throughout the application
+* Implement backend logic in UI components
+
+Use:
+
+```text
+services/
+hooks/
+types/
+utils/
+```
+
+---
+
+# FUTURE API PLACEHOLDERS
+
+Design service methods around future endpoints:
+
+```text
+GET    /customers
+GET    /customers/:id
+POST   /customers
+PUT    /customers/:id
+
+GET    /amc-contracts
+POST   /amc-contracts
+
+GET    /service-history
+GET    /customers/:id/services
+
+GET    /complaints
+POST   /complaints
+
+GET    /payments
+POST   /payments
+
+GET    /customers/:id/health
+
+GET    /retention/recommendations
+
+POST   /ai/analyze-complaint
+
+POST   /ai/generate-renewal-email
+
+POST   /retention/action
+```
+
+For now, these are mock service functions.
+
+---
+
+# ERROR HANDLING
+
+Handle:
+
+Frontend validation errors
+
+Network errors
+
+Service errors
+
+AI errors
+
+Empty data
+
+Loading states
+
+Invalid route
+
+For AI failure, show:
+
+```text
+AI analysis is temporarily unavailable.
+
+You can continue using the standard workflow.
+```
+
+The application must remain usable even if AI is unavailable.
+
+---
+
+# SECURITY
+
+Even though this is frontend-only:
+
+Do not:
+
+* Expose API keys
+* Put secrets in source code
+* Pretend frontend authentication is secure
+* Put database credentials in `.env` frontend variables
+
+Only use:
+
+```text
+VITE_API_BASE_URL
+```
+
+as a future API URL placeholder.
+
+---
+
+# GIT / PROJECT FILES
+
+Create:
+
+```text
+.gitignore
+.env.example
+README.md
+```
+
+README should explain:
+
+* Project
+* Tech stack
+* Installation
+* Development
+* Project structure
+* Current frontend-only architecture
+* Future n8n integration
+* Future PostgreSQL integration
+* Future AI integration
+
+Do not claim backend features are already implemented.
+
+---
+
+# PERFORMANCE
+
+Keep the application reasonably lightweight.
+
+Avoid:
+
+* Huge dependencies
+* Unnecessary rerenders
+* Duplicate components
+* Large images
+* Excessive animations
+
+Use reusable components.
+
+---
+
+# CODE QUALITY
+
+Follow these rules:
+
+* TypeScript everywhere
+* No unnecessary `any`
+* No unused imports
+* No duplicate logic
+* No giant components
+* No repeated mock data
+* No hardcoded API calls
+* No console errors
+* No broken routes
+* No dead UI buttons unless clearly marked as future functionality
+
+Use clear naming.
+
+---
+
+# IMPORTANT: FUNCTIONALITY
+
+The frontend must not merely be static screenshots.
+
+Implement functional interactions:
+
+* Navigation
+* Search
+* Filtering
+* Sorting
+* Pagination
+* Tabs
+* Modals
+* Forms
+* Form validation
+* Toasts
+* Dropdowns
+* Notifications
+* Customer navigation
+* Customer detail
+* AI mock analysis
+* AI email generation mock
+* Retention approval
+* Settings toggles
+* Charts
+* Responsive sidebar
+
+Use local state/context where appropriate.
+
+For demo purposes, updates can exist in frontend state.
+
+---
+
+# FRONTEND STATE
+
+Use the simplest appropriate state architecture.
+
+Do not introduce Redux unless truly necessary.
+
+Use:
+
+* React state
+* Context where useful
+* Custom hooks where useful
+
+Keep state understandable.
+
+---
+
+# PHASED INTERNAL BUILD PROCESS
+
+Although this is a one-shot request, build internally in this order:
+
+## Phase 1
+
+Project setup
+
+Design system
+
+App shell
+
+Routing
+
+Reusable components
+
+## Phase 2
+
+Dashboard
+
+## Phase 3
+
+Customers
+
+Customer detail
+
+## Phase 4
+
+AMC
+
+## Phase 5
+
+Services
+
+## Phase 6
+
+Complaints
+
+AI complaint analysis mock
+
+## Phase 7
+
+Payments
+
+## Phase 8
+
+Retention Center
+
+Retention details
+
+Retention actions
+
+AI renewal email mock
+
+## Phase 9
+
+Reports
+
+## Phase 10
+
+Notifications
+
+Settings
+
+## Phase 11
+
+API/service architecture
+
+## Phase 12
+
+Responsive and accessibility polish
+
+## Phase 13
+
+Final testing and bug fixing
+
+Do not stop between phases.
+
+Complete all phases.
+
+---
+
+# FINAL QA
+
+After implementation:
+
+Run the application.
+
+Check every route:
+
+```text
+/dashboard
+/customers
+/customers/:id
+/amc-contracts
+/amc-contracts/:id
+/services
+/complaints
+/complaints/:id
+/payments
+/retention
+/retention/:id
+/reports
+/notifications
+/settings
+```
+
+Test:
+
+* Navigation
+* Sidebar
+* Mobile menu
+* Search
+* Filters
+* Tables
+* Forms
+* Validation
+* Modals
+* Toasts
+* Tabs
+* Charts
+* Customer detail navigation
+* Retention actions
+* AI mock workflows
+* Notification dropdown
+* Settings
+* 404
+* Responsive layout
+
+Check:
+
+```text
+npm run build
+```
+
+Fix all build errors.
+
+Fix TypeScript errors.
+
+Fix obvious UI problems.
+
+Fix console errors.
+
+---
+
+# FINAL OUTPUT
+
+When finished, provide a concise implementation summary containing:
+
+1. What was built
+2. Technology used
+3. Main pages
+4. Major reusable components
+5. Mock data implemented
+6. AI mock functionality
+7. API architecture prepared
+8. How to run the application
+9. Any known limitations
+
+Do NOT claim that n8n, PostgreSQL, Gemini/Grok, email, authentication, or real backend functionality has been implemented.
+
+Clearly state:
+
+**Frontend complete — backend integration ready for the next phase.**
+
+---
+
+# MOST IMPORTANT PRODUCT REQUIREMENT
+
+The application must communicate this idea immediately:
+
+> **ServicePulse helps service businesses understand which customers are at risk of not renewing, why they are at risk, and what action should be taken to retain them.**
+
+The strongest page is the **Retention Center**.
+
+The strongest workflow is:
+
+```text
+Customer
+   ↓
+Health Score
+   ↓
+Risk
+   ↓
+Risk Factors
+   ↓
+Recommended Action
+   ↓
+Owner Approval
+   ↓
+AI-assisted Communication
+```
+
+Build the UI around this business story.
+
+Do not turn ServicePulse into a generic CRM.
+
+---
+
+# FINAL INSTRUCTION
+
+Build the complete frontend now.
+
+Do not stop after scaffolding.
+
+Do not wait for further instructions.
+
+Do not implement the backend.
+
+Finish the complete frontend, run the build, fix errors, verify all routes and interactions, and leave the project in a clean, maintainable state.
+
+**ServicePulse**
+
+**Track. Analyze. Retain.**
